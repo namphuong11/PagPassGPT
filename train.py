@@ -100,12 +100,12 @@ print(model)
 # Load training config with optimizations
 print(f'Load training config.')
 training_args = TrainingArguments(
-    output_dir=model_output_dir, 
-    overwrite_output_dir=True, 
+    output_dir=model_output_dir,
+    overwrite_output_dir=True,
     num_train_epochs=epoch_num,
     per_device_train_batch_size=batch_size,
     per_device_eval_batch_size=batch_size,
-    gradient_accumulation_steps=4,  # 128 * 4 = 512 (batch size hiệu quả)
+    gradient_accumulation_steps=4,
     eval_steps=eval_step,
     save_steps=save_step,
     save_strategy='steps',
@@ -116,8 +116,9 @@ training_args = TrainingArguments(
     metric_for_best_model='eval_loss',
     load_best_model_at_end=True,
     save_total_limit=1,
-    fp16=True,  # Thử bật lại mixed precision
-    gradient_checkpointing=False  # Tắt gradient checkpointing để tăng tốc
+    fp16=True,
+    gradient_checkpointing=False,
+    report_to="none"  # Tắt báo cáo tới W&B
 )
 
 # Giải phóng bộ nhớ GPU
